@@ -1,9 +1,10 @@
 # Change Log
 
-All notable changes to the "valkyrie-lang" extension will be documented in this file.
+## [0.1.0] - 2024-09-26
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+### Added
 
-## [Unreleased]
-
-- Initial release
+- Initial release of Valkyrie Language Support extension.
+- Support for Valkyrie and Runic esolangs.
+- Syntax highlighting and language configuration.
+- Document formatting and interpreter command.

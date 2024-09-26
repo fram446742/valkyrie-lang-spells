@@ -1,13 +1,13 @@
-# Valkyrie Language Extension
+# Valkyrie Language Support
 
-Welcome to the Valkyrie Language Extension for Visual Studio Code! This extension provides support for the Valkyrie programming language, enhancing your development experience with syntax highlighting, code snippets, and more.
+Welcome to the Valkyrie Language Support Extension for Visual Studio Code! This extension provides support for the Valkyrie programming language, enhancing your development experience with syntax highlighting, formatting, and more.
 
 ## Features
 
 - **Syntax Highlighting**: Provides syntax highlighting for Valkyrie language files.
-- **Code Snippets**: Includes commonly used code snippets to speed up your development.
+- **Formatting**: Includes the hability to format your code for better readability.
 - **IntelliSense**: Offers code completion and IntelliSense for Valkyrie language constructs.
-- **Error Checking**: Highlights syntax errors and provides suggestions for corrections.
+- **Execution**: Grants the hability to run code from the editor with the interpreter.
 
 > Tip: Utilize animations to showcase your extension's features. Short, focused animations are highly effective.
 
@@ -20,16 +20,15 @@ Welcome to the Valkyrie Language Extension for Visual Studio Code! This extensio
 
 This extension contributes the following settings:
 
-- `valkyrie-lang.enableLinting`: Enable/disable linting for Valkyrie files.
-- `valkyrie-lang.lintOnSave`: Run the linter on file save.
+- `valkyrie-lang-spells.runInterpreter`: Executes the code with the interpreter.
+- `valkyrie-lang-spells.formatDocument`: Formats the document.
 
 ## Known Issues
 
-- Syntax highlighting may not work correctly for nested templates.
-- Code completion might be slow for large projects.
+- No syntax highlighting.
 
 ## Release Notes
 
-### 1.0.0
+### 0.1.0
 
-- Initial release with syntax highlighting, code snippets, and basic IntelliSense.
+- Initial release with formatting, execution, and basic IntelliSense.

@@ -1,5 +1,5 @@
 {
-  "name": "valkyrie-lang",
+  "name": "valkyrie-lang-spells",
   "displayName": "Valkyrie Language Support",
   "description": "A simple extension to add support for the Valkyrie esolang",
   "publisher": "francisco446742",
@@ -69,14 +69,6 @@
         "title": "Run Valkyrie Interpreter"
       }
     ],
-    "configurationDefaults": {
-      "[valkyrie]": {
-        "editor.defaultFormatter": "francisco446742-valkyrie-lang"
-      },
-      "[runic]": {
-        "editor.defaultFormatter": "francisco446742-valkyrie-lang"
-      }
-    },
     "configuration": {
       "properties": {
         "valkyrieLangSpells.interpreterPath": {
@@ -106,6 +98,14 @@
     "activationEvents": [
       "onLanguage:valkyrie",
       "onLanguage:runic"
-    ]
+    ],
+    "configurationDefaults": {
+      "[valkyrie]": {
+        "editor.defaultFormatter": "francisco446742-valkyrie-lang"
+      },
+      "[runic]": {
+        "editor.defaultFormatter": "francisco446742-valkyrie-lang"
+      }
+    }
   }
 }
