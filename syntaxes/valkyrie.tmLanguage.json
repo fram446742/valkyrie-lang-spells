@@ -1,0 +1,186 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Valkyrie",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#numbers"
+		},
+		{
+			"include": "#operators"
+		},
+		{
+			"include": "#punctuation"
+		},
+		{
+			"include": "#variables"
+		},
+		{
+			"include": "#functions"
+		},
+		{
+			"include": "#types"
+		},
+		{
+			"include": "#booleans"
+		},
+		{
+			"include": "#preprocessor"
+		},
+		{
+			"include": "#classes"
+		},
+		{
+			"include": "#indentation"
+		},
+		{
+			"include": "#null"
+		},
+		{
+			"include": "#this"
+		},
+		{
+			"include": "#super"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.valkyrie",
+				"match": "\\b(var|fun|if|else|while|for|return|and|class|or|super|this)\\b"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.double.valkyrie",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.valkyrie",
+					"match": "\\\\."
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line.double-slash.valkyrie",
+					"match": "//.*$"
+				}
+			]
+		},
+		"numbers": {
+			"patterns": [
+				{
+					"name": "constant.numeric.valkyrie",
+					"match": "\\b\\d+\\b"
+				}
+			]
+		},
+		"operators": {
+			"patterns": [
+				{
+					"name": "keyword.operator.valkyrie",
+					"match": "\\+|\\-|\\*|\\/"
+				}
+			]
+		},
+		"punctuation": {
+			"patterns": [
+				{
+					"name": "punctuation.separator.valkyrie",
+					"match": ";"
+				}
+			]
+		},
+		"variables": {
+			"patterns": [
+				{
+					"name": "variable.other.valkyrie",
+					"match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b"
+				}
+			]
+		},
+		"functions": {
+			"patterns": [
+				{
+					"name": "entity.name.function.valkyrie",
+					"match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b(?=\\()|fun\\s+[a-zA-Z_][a-zA-Z0-9_]*|print"
+				}
+			]
+		},
+		"types": {
+			"patterns": [
+				{
+					"name": "storage.type.valkyrie",
+					"match": "\\b(int|float|bool|void)\\b"
+				}
+			]
+		},
+		"booleans": {
+			"patterns": [
+				{
+					"name": "constant.language.valkyrie",
+					"match": "\\b(true|false)\\b"
+				}
+			]
+		},
+		"preprocessor": {
+			"patterns": [
+				{
+					"name": "keyword.control.directive.valkyrie",
+					"match": "#\\w+"
+				}
+			]
+		},
+		"classes": {
+			"patterns": [
+				{
+					"name": "entity.name.type.class.valkyrie",
+					"match": "\\bclass\\s+[a-zA-Z_][a-zA-Z0-9_]*\\b"
+				}
+			]
+		},
+		"indentation": {
+			"patterns": [
+				{
+					"name": "punctuation.definition.indent.valkyrie",
+					"match": "^\\s+"
+				}
+			]
+		},
+		"null": {
+			"patterns": [
+				{
+					"name": "constant.language.null.runic",
+					"match": "\\bnull\\b"
+				}
+			]
+		},
+		"this": {
+			"patterns": [
+				{
+					"name": "variable.language.this.runic",
+					"match": "\\bthis\\b"
+				}
+			]
+		},
+		"super": {
+			"patterns": [
+				{
+					"name": "variable.language.super.runic",
+					"match": "\\bsuper\\b"
+				}
+			]
+		}
+	},
+	"scopeName": "source.valkyrie"
+}

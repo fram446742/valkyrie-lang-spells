@@ -1,0 +1,111 @@
+{
+  "name": "valkyrie-lang",
+  "displayName": "Valkyrie Language Support",
+  "description": "A simple extension to add support for the Valkyrie esolang",
+  "publisher": "francisco446742",
+  "version": "0.1.0",
+  "icon": "icons/VALKYRIE-ICON.ico",
+  "engines": {
+    "vscode": "^1.93.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "main": "./src/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "valkyrie",
+        "aliases": [
+          "Valkyrie",
+          "valkyrie"
+        ],
+        "extensions": [
+          ".valkyrie"
+        ],
+        "configuration": "./language-configuration.json",
+        "filenames": [
+          "*.valkyrie"
+        ],
+        "icon": {
+          "light": "./icons/valkyrie-dark.svg",
+          "dark": "./icons/valkyrie-light.svg"
+        }
+      },
+      {
+        "id": "runic",
+        "aliases": [
+          "Runic",
+          "runic"
+        ],
+        "extensions": [
+          ".runic"
+        ],
+        "configuration": "./language-configuration.json",
+        "filenames": [
+          "*.runic"
+        ],
+        "icon": {
+          "light": "./icons/runic-dark.svg",
+          "dark": "./icons/runic-light.svg"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "valkyrie",
+        "scopeName": "source.valkyrie",
+        "path": "./syntaxes/valkyrie.tmLanguage.json"
+      },
+      {
+        "language": "runic",
+        "scopeName": "source.runic",
+        "path": "./syntaxes/runic.tmLanguage.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "valkyrie-lang-spells.runInterpreter",
+        "title": "Run Valkyrie Interpreter"
+      }
+    ],
+    "configurationDefaults": {
+      "[valkyrie]": {
+        "editor.defaultFormatter": "francisco446742-valkyrie-lang"
+      },
+      "[runic]": {
+        "editor.defaultFormatter": "francisco446742-valkyrie-lang"
+      }
+    },
+    "configuration": {
+      "properties": {
+        "valkyrieLangSpells.interpreterPath": {
+          "type": "string",
+          "description": "Path to the Valkyrie interpreter executable."
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "valkyrie-lang-spells.runInterpreter",
+        "key": "f5",
+        "mac": "f5",
+        "when": "editorTextFocus"
+      }
+    ],
+    "documentFormatting": [
+      {
+        "language": "valkyrie",
+        "command": "valkyrie-lang-spells.formatDocument"
+      },
+      {
+        "language": "runic",
+        "command": "valkyrie-lang-spells.formatDocument"
+      }
+    ],
+    "activationEvents": [
+      "onLanguage:valkyrie",
+      "onLanguage:runic"
+    ]
+  }
+}
