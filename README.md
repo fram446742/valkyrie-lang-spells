@@ -9,8 +9,6 @@ Welcome to the Valkyrie Language Support Extension for Visual Studio Code! This 
 - **IntelliSense**: Offers code completion and IntelliSense for Valkyrie language constructs.
 - **Execution**: Grants the hability to run code from the editor with the interpreter.
 
-> Tip: Utilize animations to showcase your extension's features. Short, focused animations are highly effective.
-
 ## Requirements
 
 - Visual Studio Code v1.50.0 or higher
