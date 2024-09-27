@@ -16,7 +16,12 @@ function activate(context) {
             document.positionAt(0),
             document.positionAt(document.getText().length),
           );
-          const formattedText = formatText(document.getText());
+          let formattedText;
+          if (language === "valkyrie") {
+            formattedText = formatText(document.getText());
+          } else if (language === "runic") {
+            formattedText = formatTextRunic(document.getText());
+          }
           edits.push(TextEdit.replace(fullRange, formattedText));
           return edits;
         },
@@ -573,6 +578,147 @@ function runInterpreterCommand(interpreterPath, filePath) {
 
 // Function to format the text
 function formatText(text) {
+  const lines = text.split("\n");
+  let formattedLines = [];
+  let indentLevel = 0;
+  const indentUnit = "    "; // Four spaces for indentation
+  let inMultiLineComment = false;
+
+  const increaseIndent = () => {
+    indentLevel++;
+  };
+
+  const decreaseIndent = () => {
+    indentLevel = Math.max(0, indentLevel - 1);
+  };
+
+  const keywordMappings = {
+    var: "𖤍", fun: "♅", print: "♅♅", if: "↟↟", else: "↟↡",
+    while: "↟↠", for: "𒌐", return: "↡", and: "↠↠",
+    class: "🕈", or: "↞↞", super: "🕈↟", this: "🕈↡"
+  };
+
+
+  // Add spaces around braces and normalize spaces
+  const addSpaces = (line) => {
+    return line
+      .replace(/\)\s*\{/g, ") {")
+      .replace(/\s*([\(\)\{\}])\s*/g, " $1 ") // Add spaces around parentheses and braces
+      .replace(/\s+/g, " ") // Normalize multiple spaces
+      .trim(); // Trim leading and trailing spaces
+  };
+
+  // Split statements correctly considering 'for' loops
+  const splitStatements = (line) => {
+    const forLoopMatch = line.match(/(for|𒌐)\s*\(.*?\)\s*\n*\{/);
+    if (forLoopMatch) {
+      const forLoop = forLoopMatch[0];
+      const restOfLine = line.replace(forLoop, "");
+      return [
+        forLoop,
+        ...restOfLine.split(";").map((stmt) => stmt.trim()).filter(Boolean),
+      ];
+    }
+    return line.split(";").map((stmt) => stmt.trim()).filter(Boolean);
+  };
+
+  lines.forEach((line) => {
+    let trimmedLine = line.trim();
+
+    // Handle multi-line comments
+    if (inMultiLineComment) {
+      formattedLines.push(indentUnit.repeat(indentLevel) + trimmedLine);
+      if (trimmedLine.endsWith("*/")) {
+        inMultiLineComment = false;
+      }
+      return;
+    }
+
+    if (trimmedLine.startsWith("/*")) {
+      formattedLines.push(indentUnit.repeat(indentLevel) + trimmedLine);
+      if (!trimmedLine.endsWith("*/")) {
+        inMultiLineComment = true;
+      }
+      return;
+    }
+
+    // Handle single-line comments
+    if (trimmedLine.startsWith("//")) {
+      formattedLines.push(indentUnit.repeat(indentLevel) + trimmedLine);
+      return;
+    }
+
+    // Decrease indent for closing braces
+    if (trimmedLine.startsWith("}")) {
+      decreaseIndent();
+    }
+
+    // Split the line into individual statements
+    let splitLines = splitStatements(trimmedLine);
+
+    splitLines.forEach((splitLine) => {
+      let processedLine = addSpaces(splitLine);
+
+      // Replace runes with keyword mappings
+      Object.keys(keywordMappings).forEach((keyword) => {
+        const rune = keywordMappings[keyword];
+        processedLine = processedLine.replace(new RegExp(`\\b${rune}\\b`, 'g'), keyword);
+      });
+
+      // Increase indent after opening brace
+      if (processedLine.endsWith("{")) {
+        formattedLines.push(indentUnit.repeat(indentLevel) + processedLine);
+        increaseIndent();
+        return;
+      }
+
+      // Decrease indent before closing brace
+      if (processedLine === "}") {
+        decreaseIndent();
+        formattedLines.push(indentUnit.repeat(indentLevel) + processedLine);
+        return;
+      }
+
+      // Add the processed line with the correct indentation
+      formattedLines.push(indentUnit.repeat(indentLevel) + processedLine);
+
+      // Handle brace split cases
+      let braceSplitLines = processedLine.split(/(\{|\})/).filter(Boolean);
+      if (braceSplitLines.length > 1) {
+        braceSplitLines.forEach((braceSplitLine) => {
+          if (braceSplitLine === "{") {
+            increaseIndent();
+          } else if (braceSplitLine === "}") {
+            decreaseIndent();
+          }
+          formattedLines.push(
+            indentUnit.repeat(indentLevel) + braceSplitLine.trim()
+          );
+        });
+      }
+    });
+  });
+
+  // Ensure all lines have proper semicolons, except for control flow statements
+  formattedLines = formattedLines.map((line) => {
+    if (
+      line.trim() === "" ||
+      line.trim().startsWith("//") ||
+      line.trim().endsWith("}") ||
+      line.trim().endsWith("{") ||
+      // and the next line or after a space there is a { so it isnt being put when ) { or ) \n {
+      (/\)\s*\n*\{/.test(line.trim())) ||
+      line.trim().endsWith(";")
+    ) {
+      return line;
+    }
+    return line + ";";
+  });
+
+  return formattedLines.join("\n");
+}
+
+function formatTextRunic(text) {
   const lines = text.split("\n");
   let formattedLines = [];
   let indentLevel = 0;

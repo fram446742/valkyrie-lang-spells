@@ -3,7 +3,7 @@
   "displayName": "Valkyrie Language Support",
   "description": "A simple extension to add support for the Valkyrie esolang",
   "publisher": "francisco446742",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/fram446742/valkyrie-lang-spells"
