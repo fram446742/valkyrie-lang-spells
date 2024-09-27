@@ -1,136 +1,137 @@
 {
-    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-    "name": "Runic",
-    "patterns": [
-        { "include": "#keywords" },
-        { "include": "#strings" },
-        { "include": "#comments" },
-        { "include": "#numbers" },
-        { "include": "#operators" },
-        { "include": "#punctuation" },
-        { "include": "#variables" },
-        { "include": "#functions" },
-        { "include": "#types" },
-        { "include": "#booleans" },
-        { "include": "#preprocessor" },
-        { "include": "#classes" },
-        { "include": "#indentation" },
-        { "include": "#null" },
-        { "include": "#this" },
-        { "include": "#super" }
-    ],
-    "repository": {
-        "keywords": {
-            "patterns": [
-                {
-                    "name": "keyword.control.runic",
-                    "match": "\\b(var|fun|if|else|while|for|return|and|class|or|super|this|𖤍|♅|↟↟|↟↡|↟↠|𒌐|↡|↠↠|🕈|↞↞|🕈↟|🕈↡)\\b"
-                }
-            ]
-        },
-        "strings": {
-            "name": "string.quoted.double.runic",
-            "begin": "\"",
-            "end": "\"",
-            "patterns": [
-                { "name": "constant.character.escape.runic", "match": "\\\\." }
-            ]
-        },
-        "comments": {
-            "patterns": [
-                { "name": "comment.line.double-slash.runic", "match": "//.*$" }
-            ]
-        },
-        "numbers": {
-            "patterns": [
-                { "name": "constant.numeric.runic", "match": "\\b\\d+\\b" }
-            ]
-        },
-        "operators": {
-            "patterns": [
-                {
-                    "name": "keyword.operator.runic",
-                    "match": "\\+|\\-|\\*|\\/|↠↠|↞↞"
-                }
-            ]
-        },
-        "punctuation": {
-            "patterns": [
-                { "name": "punctuation.separator.runic", "match": ";" }
-            ]
-        },
-        "variables": {
-            "patterns": [
-                {
-                    "name": "variable.other.runic",
-                    "match": "\\b[a-zA-Zᚨᛒᚲᚦᛅᚠᛞᚺᛁᚴᛘᛐᛖᚾᛜᛩᛶᛃᛋᛄᚢᛡᚳ×ᛣᛇᚪᛔᛈᚣᚯᚡᛥᚻᛂᚵᛯᛚᛗᚬᛟᚹᚿᚱᛊᛏᚤᛤᛠᚷᛉᛢ_][a-zA-Zᚨᛒᚲᚦᛅᚠᛞᚺᛁᚴᛘᛐᛖᚾᛜᛩᛶᛃᛋᛄᚢᛡᚳ×ᛣᛇᚪᛔᛈᚣᚯᚡᛥᚻᛂᚵᛯᛚᛗᚬᛟᚹᚿᚱᛊᛏᚤᛤᛠᚷᛉᛢ0-9_]*\\b"
-                }
-            ]
-        },
-        "functions": {
-            "patterns": [
-                {
-                    "name": "entity.name.function.runic",
-                    "match": "\\b[a-zA-Zᚨᛒᚲᚦᛅᚠᛞᚺᛁᚴᛘᛐᛖᚾᛜᛩᛶᛃᛋᛄᚢᛡᚳ×ᛣᛇᚪᛔᛈᚣᚯᚡᛥᚻᛂᚵᛯᛚᛗᚬᛟᚹᚿᚱᛊᛏᚤᛤᛠᚷᛉᛢ_][a-zA-Zᚨᛒᚲᚦᛅᚠᛞᚺᛁᚴᛘᛐᛖᚾᛜᛩᛶᛃᛋᛄᚢᛡᚳ×ᛣᛇᚪᛔᛈᚣᚯᚡᛥᚻᛂᚵᛯᛚᛗᚬᛟᚹᚿᚱᛊᛏᚤᛤᛠᚷᛉᛢ0-9_]*\\b(?=\\()"
-                }
-            ]
-        },
-        "types": {
-            "patterns": [
-                {
-                    "name": "storage.type.runic",
-                    "match": "\\b(int|float|bool|void)\\b"
-                }
-            ]
-        },
-        "booleans": {
-            "patterns": [
-                {
-                    "name": "constant.language.runic",
-                    "match": "\\b(true|false|𖤓|☽)\\b"
-                }
-            ]
-        },
-        "preprocessor": {
-            "patterns": [
-                {
-                    "name": "keyword.control.directive.runic",
-                    "match": "#\\w+"
-                }
-            ]
-        },
-        "classes": {
-            "patterns": [
-                {
-                    "name": "entity.name.type.class.runic",
-                    "match": "\\bclass\\s+[a-zA-Z_][a-zA-Z0-9_]*\\b|🕈"
-                }
-            ]
-        },
-        "null": {
-            "patterns": [
-                {
-                    "name": "constant.language.null.runic",
-                    "match": "\\b(null|☽𖤍)\\b"
-                }
-            ]
-        },
-        "this": {
-            "patterns": [
-                {
-                    "name": "variable.language.this.runic",
-                    "match": "\\b(this|🕈↡)\\b"
-                }
-            ]
-        },
-        "super": {
-            "patterns": [
-                {
-                    "name": "variable.language.super.runic",
-                    "match": "\\b(super|🕈↟)\\b"
-                }
-            ]
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Runic",
+  "patterns": [
+    { "include": "#keywords" },
+    { "include": "#strings" },
+    { "include": "#comments" },
+    { "include": "#numbers" },
+    { "include": "#operators" },
+    { "include": "#punctuation" },
+    { "include": "#variables" },
+    { "include": "#functions" },
+    { "include": "#types" },
+    { "include": "#booleans" },
+    { "include": "#preprocessor" },
+    { "include": "#classes" },
+    { "include": "#indentation" },
+    { "include": "#null" },
+    { "include": "#this" },
+    { "include": "#super" }
+  ],
+  "repository": {
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.runic",
+          "match": "\\b(var|fun|if|else|while|for|return|and|class|or|super|this|𖤍|♅|↟↟|↟↡|↟↠|𒌐|↡|↠↠|🕈|↞↞|🕈↟|🕈↡)\\b"
         }
+      ]
     },
-    "scopeName": "source.runic"
+    "strings": {
+      "name": "string.quoted.double.runic",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        { "name": "constant.character.escape.runic", "match": "\\\\." }
+      ]
+    },
+    "comments": {
+      "patterns": [
+        { "name": "comment.line.double-slash.runic", "match": "//.*$" },
+        {
+          "name": "comment.block.runic",
+          "begin": "/\\*",
+          "end": "\\*/"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [{ "name": "constant.numeric.runic", "match": "\\b\\d+\\b" }]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.runic",
+          "match": "\\+|\\-|\\*|\\/|↠↠|↞↞"
+        }
+      ]
+    },
+    "punctuation": {
+      "patterns": [{ "name": "punctuation.separator.runic", "match": ";" }]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "name": "variable.other.runic",
+          "match": "\\b[a-zA-Zᚨᛒᚲᚦᛅᚠᛞᚺᛁᚴᛘᛐᛖᚾᛜᛩᛶᛃᛋᛄᚢᛡᚳ×ᛣᛇᚪᛔᛈᚣᚯᚡᛥᚻᛂᚵᛯᛚᛗᚬᛟᚹᚿᚱᛊᛏᚤᛤᛠᚷᛉᛢ_][a-zA-Zᚨᛒᚲᚦᛅᚠᛞᚺᛁᚴᛘᛐᛖᚾᛜᛩᛶᛃᛋᛄᚢᛡᚳ×ᛣᛇᚪᛔᛈᚣᚯᚡᛥᚻᛂᚵᛯᛚᛗᚬᛟᚹᚿᚱᛊᛏᚤᛤᛠᚷᛉᛢ0-9_]*\\b"
+        }
+      ]
+    },
+    "functions": {
+      "patterns": [
+        {
+          "name": "entity.name.function.runic",
+          "match": "\\b[a-zA-Zᚨᛒᚲᚦᛅᚠᛞᚺᛁᚴᛘᛐᛖᚾᛜᛩᛶᛃᛋᛄᚢᛡᚳ×ᛣᛇᚪᛔᛈᚣᚯᚡᛥᚻᛂᚵᛯᛚᛗᚬᛟᚹᚿᚱᛊᛏᚤᛤᛠᚷᛉᛢ_][a-zA-Zᚨᛒᚲᚦᛅᚠᛞᚺᛁᚴᛘᛐᛖᚾᛜᛩᛶᛃᛋᛄᚢᛡᚳ×ᛣᛇᚪᛔᛈᚣᚯᚡᛥᚻᛂᚵᛯᛚᛗᚬᛟᚹᚿᚱᛊᛏᚤᛤᛠᚷᛉᛢ0-9_]*\\b(?=\\()"
+        }
+      ]
+    },
+    "types": {
+      "patterns": [
+        {
+          "name": "storage.type.runic",
+          "match": "\\b(int|float|bool|void)\\b"
+        }
+      ]
+    },
+    "booleans": {
+      "patterns": [
+        {
+          "name": "constant.language.runic",
+          "match": "\\b(true|false|𖤓|☽)\\b"
+        }
+      ]
+    },
+    "preprocessor": {
+      "patterns": [
+        {
+          "name": "keyword.control.directive.runic",
+          "match": "#\\w+"
+        }
+      ]
+    },
+    "classes": {
+      "patterns": [
+        {
+          "name": "entity.name.type.class.runic",
+          "match": "\\bclass\\s+[a-zA-Z_][a-zA-Z0-9_]*\\b|🕈"
+        }
+      ]
+    },
+    "null": {
+      "patterns": [
+        {
+          "name": "constant.language.null.runic",
+          "match": "\\b(null|☽𖤍)\\b"
+        }
+      ]
+    },
+    "this": {
+      "patterns": [
+        {
+          "name": "variable.language.this.runic",
+          "match": "\\b(this|🕈↡)\\b"
+        }
+      ]
+    },
+    "super": {
+      "patterns": [
+        {
+          "name": "variable.language.super.runic",
+          "match": "\\b(super|🕈↟)\\b"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.runic"
 }
