@@ -50,8 +50,8 @@
           "*.runic"
         ],
         "icon": {
-          "light": "./icons/runic-dark.svg",
-          "dark": "./icons/runic-light.svg"
+          "light": "./icons/viking-helmet-dark.svg",
+          "dark": "./icons/viking-helmet-light.svg"
         }
       }
     ],
