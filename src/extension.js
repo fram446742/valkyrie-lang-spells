@@ -38,6 +38,7 @@ function activate(context) {
   const keywordMappings = {
     var: { description: "Variable declaration", rune: "𖤍" },
     fun: { description: "Function declaration", rune: "♅" },
+    print: { description: "Function declaration", rune: "♅♅" },
     if: { description: "Conditional statement", rune: "↟↟" },
     else: { description: "Alternative conditional branch", rune: "↟↡" },
     while: { description: "Loop with condition", rune: "↟↠" },
@@ -48,6 +49,22 @@ function activate(context) {
     or: { description: "Logical or", rune: "↞↞" },
     super: { description: "Reference to superclass", rune: "🕈↟" },
     this: { description: "Reference to current instance", rune: "🕈↡" },
+  };
+
+
+  const keywordMappingsRunic = {
+    var: { description: "Variable declaration", runic: "ᛡᚨᛃ" },
+    fun: { description: "Function declaration", runic: "ᚠᚢᚾ" },
+    if: { description: "Conditional statement", runic: "ᛁᚠ" },
+    else: { description: "Alternative conditional branch", runic: "ᛅᛐᛋᛅ" },
+    while: { description: "Loop with condition", runic: "ᚳᚺᛁᛐᛅ" },
+    for: { description: "Loop statement", runic: "ᚠᛜᛃ" },
+    return: { description: "Return from function", runic: "ᛃᛅᛄᚢᛃᚾ" },
+    and: { description: "Logical and", runic: "ᚨᚾᚦ" },
+    class: { description: "Class declaration", runic: "ᚲᛐᚨᛋᛋ" },
+    or: { description: "Logical or", runic: "ᛜᛃ" },
+    super: { description: "Reference to superclass", runic: "ᛋᚢᛩᛅᛃ" },
+    this: { description: "Reference to current instance", runic: "ᛄᚺᛁᛋ" },
   };
 
   const runeMappings = {
@@ -64,6 +81,22 @@ function activate(context) {
     "↞↞": { description: "Logical or", keyword: "or" },
     "🕈↟": { description: "Reference to superclass", keyword: "super" },
     "🕈↡": { description: "Reference to current instance", keyword: "this" },
+  };
+
+  const runeMappingsLatin = {
+    "ᛡᚨᛃ": { description: "Variable declaration", keyword: "var" },
+    "ᚠᚢᚾ": { description: "Function declaration", keyword: "fun" },
+    "ᛩᛃᛁᚾᛄ": { description: "Function declaration", keyword: "print" },
+    "ᛁᚠ": { description: "Conditional statement", keyword: "if" },
+    "ᛅᛐᛋᛅ": { description: "Alternative conditional branch", keyword: "else" },
+    "ᚳᚺᛁᛐᛅ": { description: "Loop with condition", keyword: "while" },
+    "ᚠᛜᛃ": { description: "Loop statement", keyword: "for" },
+    "ᛃᛅᛄᚢᛃᚾ": { description: "Return from function", keyword: "return" },
+    "ᚨᚾᚦ": { description: "Logical and", keyword: "and" },
+    "ᚲᛐᚨᛋᛋ": { description: "Class declaration", keyword: "class" },
+    "ᛜᛃ": { description: "Logical or", keyword: "or" },
+    "ᛋᚢᛩᛅᛃ": { description: "Reference to superclass", keyword: "super" },
+    "ᛄᚺᛁᛋ": { description: "Reference to current instance", keyword: "this" },
   };
 
   // Register completion provider with expanded examples
@@ -85,6 +118,16 @@ function activate(context) {
             completionItems.push(completionItem);
           }
 
+          for (const [keyword, info] of Object.entries(keywordMappingsRunic)) {
+            const completionItem = new vscode.CompletionItem(
+              keyword,
+              vscode.CompletionItemKind.Keyword,
+            );
+            completionItem.detail = `Keyword: ${keyword}`;
+            completionItem.documentation = `Runic: ${info.rune}`;
+            completionItems.push(completionItem);
+          }
+
           // Add rune completions with keyword information
           for (const [rune, info] of Object.entries(runeMappings)) {
             const runeCompletionItem = new vscode.CompletionItem(
@@ -92,6 +135,16 @@ function activate(context) {
               vscode.CompletionItemKind.Keyword,
             );
             runeCompletionItem.detail = `Rune: ${rune}`;
+            runeCompletionItem.documentation = `Keyword: ${info.keyword}`;
+            completionItems.push(runeCompletionItem);
+          }
+
+          for (const [runic, info] of Object.entries(runeMappingsLatin)) {
+            const runeCompletionItem = new vscode.CompletionItem(
+              runic,
+              vscode.CompletionItemKind.Keyword,
+            );
+            runeCompletionItem.detail = `Runic: ${runic}`;
             runeCompletionItem.documentation = `Keyword: ${info.keyword}`;
             completionItems.push(runeCompletionItem);
           }
@@ -413,11 +466,24 @@ function activate(context) {
           );
         }
 
+        const infoRunic = keywordMappingsRunic[word];
+        if (infoRunic) {
+          return new vscode.Hover(
+            `**Keyword**: ${word}\n\n**Runic**: ${infoRunic.runic}\n\n${infoRunic.description}`,
+          );
+        }
+
         // Check if the word is a rune in the mappings
         const runeInfo = runeMappings[word];
         if (runeInfo) {
           return new vscode.Hover(
             `**Rune**: ${word}\n\n**Keyword**: ${runeInfo.keyword}\n\n${runeInfo.description}`,
+          );
+        }
+        const runeInfoLatin = runeMappingsLatin[word];
+        if (runeInfoLatin) {
+          return new vscode.Hover(
+            `**Runic**: ${word}\n\n**Keyword**: ${runeInfoLatin.keyword}\n\n${runeInfoLatin.description}`,
           );
         }
 
@@ -522,7 +588,7 @@ function formatText(text) {
   };
 
   const keywordMappings = {
-    var: "𖤍", fun: "♅", if: "↟↟", else: "↟↡",
+    var: "𖤍", fun: "♅", print: "♅♅", if: "↟↟", else: "↟↡",
     while: "↟↠", for: "𒌐", return: "↡", and: "↠↠",
     class: "🕈", or: "↞↞", super: "🕈↟", this: "🕈↡"
   };
@@ -539,7 +605,7 @@ function formatText(text) {
 
   // Split statements correctly considering 'for' loops
   const splitStatements = (line) => {
-    const forLoopMatch = line.match(/(for|𒌐)\s*\(.*?\)\s*\{/);
+    const forLoopMatch = line.match(/(for|𒌐)\s*\(.*?\)\s*\n*\{/);
     if (forLoopMatch) {
       const forLoop = forLoopMatch[0];
       const restOfLine = line.replace(forLoop, "");
